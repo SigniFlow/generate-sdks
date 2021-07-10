@@ -1,0 +1,261 @@
+![SigniFlow logo]
+
+# SigniFlow Connect PHP SDK
+
+---
+
+[![Build Status](https://travis-ci.org/SigniFlow/connect-php-sdk.svg?branch=master)](https://travis-ci.org/SigniFlow/connect-php-sdk)
+[![PHP version](https://badge.fury.io/ph/SigniFlow%2Fconnect.svg)](https://badge.fury.io/ph/SigniFlow%2Fconnect)
+[![Apache-2 license](https://img.shields.io/badge/license-Apache2-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+==================
+## NOTICE: SigniFlow Connect PHP SDK deprecated
+This SigniFlow Connect SDK will enter a security maintenance phase in Q2 2020 and will be RETIRED (EOL) in Q4 2020. In the security maintenance phase, this SDK will continue to receive support and security patches but will no longer receive bug fixes or product updates. Once it is retired, support and security patches will no longer be available.  A new SDK, more bespoke to the language, will be available once this SDK enters its security maintenance phase.
+The SDK itself will continue to work indefinitely until such time that the underlying APIs are retired at which point portions of the SDK may stop functioning.  For a full list of API retirement dates, please see our [SigniFlow API Lifecycle documentation](https://developer.SigniFlowup.com/docs/build-basics/api-lifecycle#deprecated-apis).
+
+| Security Maintenance | New SDK Release | Retired (EOL)  |
+| ------------- |-------------| -----|
+| Q2, 2020      | Q2, 2020 | Q4, 2020 |
+
+**If you have feedback about the new SDKs, or just want to talk to other SigniFlow Developers, request an invite to the new [slack community for SigniFlow Developers](https://squ.re/2JkDBcO)**
+
+This repository contains a generated PHP client SDK for the SigniFlow Connect APIs. Check out our [API
+specification repository](https://github.com/SigniFlow/connect-api-specification)
+for the specification and template files we used to generate this.
+
+If you are looking for a sample e-commerce application using these APIs, check out the [`connect-api-examples`](https://github.com/SigniFlow/connect-api-examples/tree/master/connect-examples/v2/php_payment) repository.
+
+To learn more about the SigniFlow APIs in general, head on over to the [SigniFlow API documentation](https://docs.connect.SigniFlowup.com/)
+
+Requirements
+------------
+* `PHP >= 5.4.0`
+* A SigniFlow account and [developer application](https://connect.SigniFlowup.com/apps/) (for authorization)
+
+Installing
+-----
+
+##### Option 1: With Composer
+
+The PHP SDK is available on Packagist. To add it to Composer, simply run:
+
+```
+$ php composer.phar require SigniFlow/connect
+```
+
+Or add this line under `"require"` to your composer.json:
+
+```
+"require": {
+    ...
+    "SigniFlow/connect": "*",
+    ...
+}
+```
+And then install your composer dependencies with
+```
+$ php composer.phar install
+```
+##### Option 2: From GitHub
+Clone this repository, or download the zip into your project's folder and then add the following line in your code:
+```
+require('connect-php-sdk/autoload.php');
+```
+*Note: you might have to change the path depending on your project's folder structure.*
+##### Option 3: Without Command Line Access
+If you cannot access the command line for your server, you can also install the SDK from github. Download the SDK from github with [this link](https://github.com/SigniFlow/connect-php-sdk/archive/master.zip), unzip it and add the following line to your php files that will need to access the SDK:
+```
+require('connect-php-sdk-master/autoload.php');
+```
+*Note: you might have to change the path depending on where you place the SDK in relation to your other `php` files.*
+
+## Getting Started
+
+Please follow the [installation procedure](#installation--usage):
+
+
+### Retrieve your location IDs
+```php
+require 'vendor/autoload.php';
+
+$access_token = 'YOUR_ACCESS_TOKEN';
+# setup authorization
+$api_config = new \SigniFlowConnect\Configuration();
+$api_config->setHost("https://connect.SigniFlowup.com");
+$api_config->setAccessToken($access_token);
+$api_client = new \SigniFlowConnect\ApiClient($api_config);
+# create an instance of the Location API
+$locations_api = new \SigniFlowConnect\Api\LocationsApi($api_client);
+
+try {
+  $locations = $locations_api->listLocations();
+  print_r($locations->getLocations());
+} catch (\SigniFlowConnect\ApiException $e) {
+  echo "Caught exception!<br/>";
+  print_r("<strong>Response body:</strong><br/>");
+  echo "<pre>"; var_dump($e->getResponseBody()); echo "</pre>";
+  echo "<br/><strong>Response headers:</strong><br/>";
+  echo "<pre>"; var_dump($e->getResponseHeaders()); echo "</pre>";
+  exit(1);
+}
+```
+
+### Charge the card nonce
+```php
+require 'vendor/autoload.php';
+
+$access_token = 'YOUR_ACCESS_TOKEN';
+
+# setup authorization
+$api_config = new \SigniFlowConnect\Configuration();
+$api_config->setHost("https://connect.SigniFlowup.com");
+$api_config->setAccessToken($access_token);
+$api_client = new \SigniFlowConnect\ApiClient($api_config);
+
+# create an instance of the Payments API class
+$payments_api = new \SigniFlowConnect\Api\PaymentsApi($api_client);
+$location_id = 'YOUR_LOCATION_ID'
+$nonce = 'YOUR_NONCE'
+
+$body = new \SigniFlowConnect\Model\CreatePaymentRequest();
+
+$amountMoney = new \SigniFlowConnect\Model\Money();
+
+# Monetary amounts are specified in the smallest unit of the applicable currency.
+# This amount is in cents. It's also hard-coded for $1.00, which isn't very useful.
+$amountMoney->setAmount(100);
+$amountMoney->setCurrency("USD");
+
+$body->setSourceId($nonce);
+$body->setAmountMoney($amountMoney);
+$body->setLocationId($location_id);
+
+# Every payment you process with the SDK must have a unique idempotency key.
+# If you're unsure whether a particular payment succeeded, you can reattempt
+# it with the same idempotency key without worrying about double charging
+# the buyer.
+$body->setIdempotencyKey(uniqid());
+
+try {
+    $result = $payments_api->createPayment($body);
+    print_r($result);
+} catch (\SigniFlowConnect\ApiException $e) {
+    echo "Exception when calling PaymentsApi->createPayment:";
+    var_dump($e->getResponseBody());
+}
+```
+
+### How to configure sandbox environment
+```php
+require 'vendor/autoload.php';
+
+$access_token = 'YOUR_SANDBOX_ACCESS_TOKEN';
+# setup authorization
+$api_config = new \SigniFlowConnect\Configuration();
+$api_config->setHost("https://connect.SigniFlowupsandbox.com");
+$api_config->setAccessToken($access_token);
+$api_client = new \SigniFlowConnect\ApiClient($api_config);
+# create an instance of the Location API
+$locations_api = new \SigniFlowConnect\Api\LocationsApi($api_client);
+```
+
+## Documentation for API Endpoints
+
+All URIs are relative to *{{basePath}}*
+
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+{{#apiInfo}}{{#apis}}{{#operations}}{{#operation}}*{{classname}}* | [**{{operationId}}**]({{apiDocPath}}/{{classname}}.md#{{operationIdLowerCase}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{/operation}}{{/operations}}{{/apis}}{{/apiInfo}}
+
+## Documentation For Models
+
+{{#models}}{{#model}} - [{{{classname}}}]({{modelDocPath}}/{{{classname}}}.md)
+{{/model}}{{/models}}
+
+## Documentation For Authorization
+
+{{#authMethods}}## {{{name}}}
+
+{{#isApiKey}}- **Type**: API key
+- **API key parameter name**: {{{keyParamName}}}
+- **Location**: {{#isKeyInQuery}}URL query string{{/isKeyInQuery}}{{#isKeyInHeader}}HTTP header{{/isKeyInHeader}}
+{{/isApiKey}}
+{{#isBasic}}- **Type**: HTTP basic authentication
+{{/isBasic}}
+{{#isOAuth}}- **Type**: OAuth
+- **Flow**: {{{flow}}}
+- **Authorization URL**: `{{{authorizationUrl}}}`
+- **Scopes**:{{^scopes}} N/A{{/scopes}}
+{{#scopes}} - **{{{scope}}}**: {{{description}}}
+{{/scopes}}
+{{/isOAuth}}
+
+{{/authMethods}}
+
+## Pagination of V1 Endpoints
+
+V1 Endpoints return pagination information via HTTP headers. In order to obtain
+response headers and extract the `batch_token` parameter you will need to follow
+the following steps:
+
+1. Use the full information endpoint methods of each API to get the response HTTP
+Headers. They are named as their simple counterpart with a `WithHttpInfo` suffix.
+Hence `listEmployeeRoles` would be called `listEmployeeRolesWithHttpInfo`. This
+method returns an array with 3 parameters: `$response`, `$http_status`, and
+`$http_headers`.
+2. Use `$batch_token = \SigniFlowConnect\ApiClient::getV1BatchTokenFromHeaders($http_headers)`
+to extract the token and proceed to get the following page if a token is present.
+
+### Example
+
+```php
+<?php
+...
+$api_instance = new SigniFlowConnect\Api\V1EmployeesApi();
+$order = null;
+$limit = 20;
+$batch_token = null;
+$roles = array();
+
+try {
+    do {
+        list($result, $status, $headers) = $api_instance->listEmployeeRolesWithHttpInfo($order, $limit, $batch_token);
+        $batch_token = \SigniFlowConnect\ApiClient::getV1BatchTokenFromHeaders($headers);
+        $roles = array_merge($roles, $result);
+    } while (!is_null($batch_token));
+    print_r($roles);
+} catch (Exception $e) {
+    echo 'Exception when calling V1EmployeesApi->listEmployeeRolesWithHttpInfo: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+
+Contributing
+------------
+
+Send bug reports, feature requests, and code contributions to the [API
+specifications repository](https://github.com/SigniFlow/connect-api-specification),
+as this repository contains only the generated SDK code. If you notice something wrong about this SDK in particular, feel free to raise an issue [here](https://github.com/SigniFlow/connect-php-sdk/issues).
+
+License
+-------
+
+```
+Copyright 2021 SigniFlow, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
+
+[//]: # "Link anchor definitions"
+[SigniFlow Logo]: https://docs.connect.SigniFlowup.com/images/github/github-SigniFlow-logo.svg

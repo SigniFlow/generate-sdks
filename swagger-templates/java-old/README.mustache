@@ -1,0 +1,250 @@
+![SigniFlow logo]
+
+# SigniFlow Connect Java SDK
+
+---
+
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.SigniFlowup/connect/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.SigniFlowup/connect)
+[![Apache-2 license](https://img.shields.io/badge/license-Apache2-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+==================
+
+**If you have feedback about the new SDKs, or just want to talk to other SigniFlow Developers, request an invite to the new [slack community for SigniFlow Developers](https://squ.re/2GB8GHk)**
+
+## Requirements
+
+Java 8
+
+Building the API client library requires [Maven](https://maven.apache.org/) to be installed.
+
+## Installation
+
+### Option 1: Maven users
+
+Add this dependency to your project's POM:
+
+```xml
+<dependency>
+    <groupId>com.SigniFlowup</groupId>
+    <artifactId>connect</artifactId>
+    <version>{{{artifactVersion}}}</version>
+    <scope>compile</scope>
+</dependency>
+```
+
+### Option 2: Gradle users
+
+Add this dependency to your project's build file:
+
+```groovy
+compile "com.SigniFlowup:connect:{{{artifactVersion}}}"
+```
+
+### Option 3: Build and Install locally
+
+To install the API client library to your local Maven repository, simply execute:
+
+```shell
+mvn install -DskipTests
+```
+
+To run tests, you would need to create below **accounts.json** under **travis-ci** folder.
+
+```json
+{
+  "US-Prod": {
+    "email": "your_email",
+    "access_token": "your_access_token",
+    "location_id": "your_location_id",
+    "application_id": "your_application_id"
+  },
+  "US-Prod-Sandbox": {
+    "email": "your_email",
+    "access_token": "your_sandbox_access_token",
+    "location_id": "your_sandbox_location_id",
+    "application_id": "your_sandbox_application_id"
+  }
+}
+```
+
+```shell
+mvn install
+```
+
+### Option 4: Others
+
+At first generate the JAR by executing:
+
+    mvn package
+
+Then manually install the following JARs:
+
+* target/{{{artifactId}}}-{{{artifactVersion}}}.jar
+* target/lib/*.jar
+
+## Getting Started
+
+Please follow the [installation](#installation) instruction and execute the following Java code:
+
+```java
+import com.SigniFlowup.connect.ApiClient;
+import com.SigniFlowup.connect.ApiException;
+import com.SigniFlowup.connect.Configuration;
+import com.SigniFlowup.connect.api.LocationsApi;
+import com.SigniFlowup.connect.auth.OAuth;
+import com.SigniFlowup.connect.models.Location;
+
+import java.io.File;
+import java.util.*;
+
+public class Example {
+
+    public static void main(String[] args) {
+        ApiClient apiClient = Configuration.getDefaultApiClient();
+
+        // Configure OAuth2 access token for authorization: oauth2
+        OAuth oauth2 = (OAuth) apiClient.getAuthentication("oauth2");
+        oauth2.setAccessToken("YOUR_ACCESS_TOKEN");
+
+        // List all locations
+        LocationsApi locationsApi = new LocationsApi();
+        locationsApi.setApiClient(apiClient);
+
+        try {
+            List<Location> locations = locationsApi.listLocations().getLocations();
+            System.out.println(locations);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling API");
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### How to configure sandbox environment
+```java
+
+import com.SigniFlowup.connect.ApiClient;
+import com.SigniFlowup.connect.ApiException;
+import com.SigniFlowup.connect.Configuration;
+import com.SigniFlowup.connect.api.LocationsApi;
+import com.SigniFlowup.connect.auth.OAuth;
+import com.SigniFlowup.connect.models.Location;
+
+import java.io.File;
+import java.util.*;
+
+public class Example {
+
+    public static void main(String[] args) {
+        ApiClient apiClient = Configuration.getDefaultApiClient();
+        // Set sandbox url
+        apiClient.setBasePath('https://connect.SigniFlowupsandbox.com');
+
+        // Configure OAuth2 access token for authorization: oauth2
+        OAuth oauth2 = (OAuth) apiClient.getAuthentication("oauth2");
+        // Set your sandbox token
+        oauth2.setAccessToken("YOUR_SANDBOX_ACCESS_TOKEN");
+
+        LocationsApi locationsApi = new LocationsApi();
+    }
+}
+```
+
+## Documentation for API Endpoints
+
+All URIs are relative to *{{basePath}}*
+
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+{{#apiInfo}}{{#apis}}{{#operations}}{{#operation}}*{{classname}}* | [**{{operationId}}**]({{apiDocPath}}{{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{summary}}{{/summary}}
+{{/operation}}{{/operations}}{{/apis}}{{/apiInfo}}
+
+## Documentation for Models
+
+{{#models}}{{#model}} - [{{classname}}]({{modelDocPath}}{{classname}}.md)
+{{/model}}{{/models}}
+
+## Documentation for Authorization
+
+{{^authMethods}}All endpoints do not require authorization.
+{{/authMethods}}Authentication schemes defined for the API:
+{{#authMethods}}### {{name}}
+
+{{#isApiKey}}- **Type**: API key
+- **API key parameter name**: {{keyParamName}}
+- **Location**: {{#isKeyInQuery}}URL query string{{/isKeyInQuery}}{{#isKeyInHeader}}HTTP header{{/isKeyInHeader}}
+{{/isApiKey}}
+{{#isBasic}}- **Type**: HTTP basic authentication
+{{/isBasic}}
+{{#isOAuth}}- **Type**: OAuth
+- **Flow**: {{flow}}
+- **Authorization URL**: {{authorizationUrl}}
+- **Scopes**: {{^scopes}}N/A{{/scopes}}
+{{#scopes}}  - {{scope}}: {{description}}
+{{/scopes}}
+{{/isOAuth}}
+
+{{/authMethods}}
+
+## Pagination of V1 Endpoints
+
+V1 Endpoints return pagination information via HTTP headers. In order to obtain
+response headers and extract the `batch_token` parameter you will need to follow
+the following steps:
+
+1. Use the full information endpoint methods of each API to get the response HTTP
+Headers. They are named as their simple counterpart with a `WithHttpInfo` suffix.
+Hence `listEmployeeRoles` would be called `listEmployeeRolesWithHttpInfo`. This
+method returns a `CompleteResponse` object with the response data deserialized along
+with a helper to retrieve the token if present.
+
+2. Use `String batchToken = completeResponse.getBatchToken();`
+to extract the token and proceed to get the following page if a token is present.
+
+### Example
+
+```java
+// Import classes:
+//import {{package}}.ApiClient;
+//import {{package}}.ApiException;
+//import {{package}}.Configuration;
+//import {{package}}.CompleteResponse;
+//import {{package}}.auth.*;
+//import {{package}}.api.V1EmployeesApi;
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+// Configure OAuth2 access token for authorization: oauth2
+OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
+oauth2.setAccessToken("YOUR ACCESS TOKEN");
+
+V1EmployeesApi apiInstance = new V1EmployeesApi();
+String order = "order_example"; // String | The order in which employees are listed in the response, based on their created_at field.Default value: ASC
+Integer limit = 56; // Integer | The maximum integer number of employee entities to return in a single response. Default 100, maximum 200.
+String batchToken = null;
+try {
+    do {
+        CompleteResponse<List<V1EmployeeRole>> completeResponse = apiInstance.listEmployeeRoles(order, limit, batchToken);
+        System.out.println(completeResponse.getData());
+
+        batchToken = completeResponse.getBatchToken();
+    } while (batchToken != null);
+} catch (ApiException e) {
+    System.err.println("Exception when calling V1EmployeesApi#listEmployeeRoles");
+    e.printStackTrace();
+}
+```
+
+## Recommendation
+
+It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
+
+## Author
+
+{{#apiInfo}}{{#apis}}{{^hasMore}}{{infoEmail}}
+{{/hasMore}}{{/apis}}{{/apiInfo}}
+
+
+
+[//]: # "Link anchor definitions"
+[SigniFlow Logo]: https://docs.connect.SigniFlowup.com/images/github/github-SigniFlow-logo.svg

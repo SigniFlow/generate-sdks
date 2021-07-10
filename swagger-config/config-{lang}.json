@@ -1,0 +1,10 @@
+// this file is a template in case you want to add a new language to
+// the generator. Valid configuration settings depend on the language.
+// You can list them by running: swagger-codegen config-help -l {lang}
+{
+  "packageName": "SigniFlow.Connect",
+  "packageVersion": "2.20180712.0",
+  "httpUserAgent": "SigniFlow-Connect-{lang}/2.20180712.0",
+  "gitUserId": "SigniFlow",
+  "gitRepoId": "connect-{lang}-sdk"
+}

@@ -1,0 +1,9 @@
+{
+  "packageName": "SigniFlow.Connect",
+  "packageVersion": "1.0.0",
+  "optionalProjectFile": "true",
+  "httpUserAgent": "SigniFlow-Connect-CSharp/1.20211120.0",
+  "packageGuid": "{4A65C772-5862-4E64-B742-0C6997700CD8}",
+  "gitUserId": "SigniFlow",
+  "gitRepoId": "connect-csharp-sdk"
+}

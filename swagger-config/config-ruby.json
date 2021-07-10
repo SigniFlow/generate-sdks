@@ -1,0 +1,13 @@
+{
+  "gemName": "SigniFlow_connect",
+  "moduleName": "SigniFlowConnect",
+  "httpUserAgent": "SigniFlow-Connect-Ruby/2.20191120.0",
+  "gemVersion": "2.20191120.0",
+  "gemAuthor": "SigniFlow, Inc.",
+  "gemAuthorEmail": "developers@SigniFlowup.com",
+  "gemHomepage": "https://github.com/SigniFlow/connect-ruby-sdk",
+  "gemDescription": "Ruby client library for the SigniFlow Connect API",
+  "gemLicense": "Apache-2.0",
+  "gitUserId": "SigniFlow",
+  "gitRepoId": "connect-ruby-sdk"
+}

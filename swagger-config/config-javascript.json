@@ -1,0 +1,9 @@
+{
+  "projectName": "SigniFlow-connect",
+  "projectVersion": "6.20201216.0",
+  "projectDescription": "JavaScript client library for the SigniFlow Connect v2 API",
+  "projectLicenseName": "Apache-2.0",
+  "moduleName": "SigniFlowConnect",
+  "usePromises": true,
+  "licenseName": "Apache 2.0"
+}
