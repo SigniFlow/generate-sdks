@@ -3,22 +3,25 @@ Connecting to the SigniFlow API
 
 This is the project that _generates_ API clients for connecting to the public SigniFlow API. You probably want to just use one of the clients that are pre-built in a language of your choice:
 
-* [Python](https://github.com/SigniFlow/connect-python-sdk)
+* [Apex](https://github.com/SigniFlow/connect-apex-sdk)
 * [C#](https://github.com/SigniFlow/connect-csharp-sdk)
-* [Ruby](https://github.com/SigniFlow/connect-ruby-sdk)
-* [PHP](https://github.com/SigniFlow/connect-php-sdk)
 * [Java](https://github.com/SigniFlow/connect-java-sdk)
 * [Javascript](https://github.com/SigniFlow/connect-javascript-sdk)
+* [Kotlin](https://github.com/SigniFlow/connect-kotlin-sdk)
+* [PHP](https://github.com/SigniFlow/connect-php-sdk)
+* [Python](https://github.com/SigniFlow/connect-python-sdk)
+* [Swift5](https://github.com/SigniFlow/connect-swift5-sdk)
 
-The [Connect Examples](https://github.com/SigniFlow/connect-api-examples/tree/master/connect-examples/) are working sample applications that you can copy from to build your own.
+
+The [Connect Examples](https://github.com/SigniFlow/connect-api-examples/) are working sample applications that you can copy from to build your own.
 
 Connect API Specifications
 =============================
 
 This repository contains the specifications for generating client SDKs with
-[Swagger/OpenAPI](http://swagger.io/).
+[OpenAPI-Generator](https://openapi-generator.tech/).
 
-The canonical specification is defined in `api.json`. The templates for our
+The canonical specification is defined in [OpenAPI-Specifications](https://github.com/SigniFlow/OpenAPI-Specifications). The templates for our
 supported SDKs are located in `swagger-templates`. The configuration for each
 SDK (e.g. name of the library, version number, etc.) are located in
 `swagger-config`.
@@ -26,7 +29,7 @@ SDK (e.g. name of the library, version number, etc.) are located in
 Configure a new language
 ------------------------
 
-Generating an SDK for a new language is possible. You'll need to have a working version of `swagger-codegen` and follow these steps:
+Generating an SDK for a new language is possible. You'll need to have a working version of `openapi-generator` and follow these steps:
 
 1. Check if Swagger Codegen supports the language by running:
     ```bash
@@ -38,22 +41,8 @@ Generating an SDK for a new language is possible. You'll need to have a working 
     ```bash
     mkdir $lang
     ```
-5. (Optional) Add custom templates for your generator. Check [Swagger Codegen Readme](https://github.com/swagger-api/swagger-codegen#modifying-the-client-library-format).
+5. (Optional) Add custom templates for your generator. Check [OpenAPI Generator Documentation](https://openapi-generator.tech/docs/templating).
 
-Generating and Downloading New Swagger Specs
---------------------------------------------
-
-Swagger specifications are now generated in our new pipeline, using the [`oas-pipeline` tool](https://git.sqcorp.co/projects/XP/repos/oas-pipeline/browse/cli). You will need the build id for an `OAS` generated with the tool in production. The Swagger Spec can then be generated with the following command:
-```
-oas-pipeline generate swagger <build_id>
-```
-
-Once the Swagger generation has succeeded, the spec files can be downloaded and pushed to a release branch with the following command:
-```
-./script/internal/download-swagger-specs.sh <build_id>
-```
-
-Note: the build id must be from a production environment build.
 
 Contributing
 ------------
