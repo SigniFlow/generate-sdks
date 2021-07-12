@@ -1,0 +1,12 @@
+{
+  "packagePath": "SigniFlowConnect",
+  "artifactVersion": "1.20210712.0",
+  "invokerPackage": "SigniFlowConnect",
+  "modelPackage": "Model",
+  "apiPackage": "Api",
+  "composerVendorName": "SigniFlow",
+  "composerProjectName": "connect",
+  "httpUserAgent": "SigniFlow-Connect-PHP/1.20210712.0",
+  "gitUserId": "signiflow",
+  "gitRepoId": "connect-php-sdk"
+}

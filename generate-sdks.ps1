@@ -29,6 +29,10 @@ java -jar .\swagger-codegen\openapi-generator-cli.jar generate -g kotlin -o "./s
 java -jar .\swagger-codegen\openapi-generator-cli.jar generate -g php -o "./swagger-out/php" -i "https://raw.githubusercontent.com/SigniFlow/OpenAPI-Specifications/main/reference/SigniFlow-OpenAPI-v1.yaml" --config "./swagger-config/config-php.json" --template-dir "./swagger-templates/php" --server-variables=serverUrl=server-url
 ./swagger-out/php/git_push.sh tjunas connect-php-sdk "minor update" "gitlab.com"
 
+#php-laravel
+java -jar .\swagger-codegen\openapi-generator-cli.jar generate -g php-laravel -o "./swagger-out/php-laravel" -i "https://raw.githubusercontent.com/SigniFlow/OpenAPI-Specifications/main/reference/SigniFlow-OpenAPI-v1.yaml" --config "./swagger-config/config-php-laravel.json" --template-dir "./swagger-templates/php-laravel" --server-variables=serverUrl=server-url
+./swagger-out/php-laravel/git_push.sh tjunas connect-php-laravel-sdk "minor update" "gitlab.com"
+
 #python
 java -jar .\swagger-codegen\openapi-generator-cli.jar generate -g python -o "./swagger-out/python" -i "https://raw.githubusercontent.com/SigniFlow/OpenAPI-Specifications/main/reference/SigniFlow-OpenAPI-v1.yaml" --config "./swagger-config/config-python.json" --template-dir "./swagger-templates/python" --server-variables=serverUrl=server-url
 ./swagger-out/python/git_push.sh tjunas connect-python-sdk "minor update" "gitlab.com"
