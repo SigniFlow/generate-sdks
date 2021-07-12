@@ -7,9 +7,9 @@ Push-Location $dir
 
 java -jar .\swagger-codegen\openapi-generator-cli.jar list
 
-#java -jar .\swagger-codegen\openapi-generator-cli.jar author template -g csharp -o "./swagger-templates/csharp"
+#java -jar .\swagger-codegen\openapi-generator-cli.jar author template -g csharp-netcore -o "./swagger-templates/csharp"
 #java -jar .\swagger-codegen\openapi-generator-cli.jar author template -g java -o "./swagger-templates/java"
-java -jar .\swagger-codegen\openapi-generator-cli.jar author template -g javascript -o "./swagger-templates/javascript"
+#java -jar .\swagger-codegen\openapi-generator-cli.jar author template -g javascript -o "./swagger-templates/javascript"
 #java -jar .\swagger-codegen\openapi-generator-cli.jar author template -g php -o "./swagger-templates/php"
 #java -jar .\swagger-codegen\openapi-generator-cli.jar author template -g apex -o "./swagger-templates/apex"
 #java -jar .\swagger-codegen\openapi-generator-cli.jar author template -g kotlin -o "./swagger-templates/kotlin"

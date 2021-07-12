@@ -30,13 +30,15 @@
         <!-- Dependencies are automatically installed when the package is installed -->
         <dependencies>
 
-            <dependency id="NewtonSoft.Json" version="{{newtonsoft-json.version}}" />
-            <dependency id="JsonSubTypes" version="{{json-subtypes.version}}" />
-            <dependency id="RestSharp" version="{{restsharp.version}}" />
-            {{#generatePropertyChanged}}
-            <dependency id="Fody" version="{{fody.version}}" />
-            <dependency id="PropertyChanged.Fody" version="{{propertychanged-fody.version}}" />
-            {{/generatePropertyChanged}}
+            <dependency id="Newtonsoft.Json" version="12.0.3" />
+            <dependency id="RestSharp" version="106.11.7" />
+            {{#useCompareNetObjects}}
+            <dependency id="CompareNETObjects" version="4.61.0" />
+            {{/useCompareNetObjects}}
+            <dependency id="JsonSubTypes" version="1.8.0" />
+            {{#validatable}}
+            <dependency id="System.ComponentModel.Annotations" version="5.0.0" />
+            {{/validatable}}
 
         </dependencies>
     </metadata>
@@ -45,9 +47,6 @@
         <!-- A readme.txt will be displayed when the package is installed -->
         <file src="..\..\README.md" target="" />
         <file src="..\..\docs\**\*.*" target="docs" />
-        {{#generatePropertyChanged}}
-        <file src="..\..\packages\Fody.1.29.4\build\portable-net+sl+win+wpa+wp\Fody.targets" target="build" />
-        {{/generatePropertyChanged}}
 
     </files>
 </package>

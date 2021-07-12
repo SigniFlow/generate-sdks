@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>{{targetFrameworkNuget}}</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TargetFramework>{{targetFramework}}</TargetFramework>
     <AssemblyName>{{packageName}}</AssemblyName>
     <PackageId>{{packageName}}</PackageId>
     <OutputType>Library</OutputType>
@@ -10,37 +11,31 @@
     <AssemblyTitle>{{packageTitle}}</AssemblyTitle>
     <Description>{{packageDescription}}</Description>
     <Copyright>{{packageCopyright}}</Copyright>
-    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
     <RootNamespace>{{packageName}}</RootNamespace>
     <Version>{{packageVersion}}</Version>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\{{packageName}}.xml</DocumentationFile>{{#licenseId}}
+    <PackageLicenseExpression>{{licenseId}}</PackageLicenseExpression>{{/licenseId}}
+    <RepositoryUrl>https://{{{gitHost}}}/{{{gitUserId}}}/{{{gitRepoId}}}.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>{{#releaseNote}}
+    <PackageReleaseNotes>{{releaseNote}}</PackageReleaseNotes>{{/releaseNote}}{{#packageTags}}
+    <PackageTags>{{{packageTags}}}</PackageTags>{{/packageTags}}
   </PropertyGroup>
 
   <ItemGroup>
-    {{#netStandard}}
-    <PackageReference Include="FubarCoder.RestSharp.Portable.Core" Version="4.0.7" />
-    <PackageReference Include="FubarCoder.RestSharp.Portable.HttpClient" Version="4.0.7" />
-    {{/netStandard}}
-    {{^netStandard}}
-    <PackageReference Include="RestSharp" Version="{{restsharp.version}}" />
-    {{/netStandard}}
-    <PackageReference Include="Newtonsoft.Json" Version="{{newtonsoft-json.version}}" />
-    <PackageReference Include="JsonSubTypes" Version="{{json-subtypes.version}}" />
+    {{#useCompareNetObjects}}
+    <PackageReference Include="CompareNETObjects" Version="4.61.0" />
+    {{/useCompareNetObjects}}
+    <PackageReference Include="JsonSubTypes" Version="1.8.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+      {{#useRestSharp}}
+    <PackageReference Include="RestSharp" Version="106.11.7" />
+      {{/useRestSharp}}
+      {{#supportsRetry}}
+    <PackageReference Include="Polly" Version="7.2.1" />
+      {{/supportsRetry}}
+    {{#validatable}}
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    {{/validatable}}
   </ItemGroup>
-
-  {{^netStandard}}
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  {{/netStandard}}
 
 </Project>
