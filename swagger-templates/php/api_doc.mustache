@@ -37,11 +37,19 @@ $apiInstance = new {{invokerPackage}}\Api\{{classname}}(
     $config
 );
 {{^vendorExtensions.x-group-parameters}}
-{{#allParams}}${{paramName}} = json_decode('{{{example}}}'); // {{{dataType}}}{{#description}} | {{{description}}}{{/description}}
+{{#allParams}}${{paramName}} = {{#isPrimitiveType}}{{{example}}}{{/isPrimitiveType}}
+{{^isPrimitiveType}}
+json_decode('{{{example}}}')
+{{/isPrimitiveType}}
+{{^isPrimitiveType}}
+ // {{{dataType}}}{{#description}} | {{{description}}}{{/description}}
+{{/isPrimitiveType}}
+
 {{/allParams}}
 {{/vendorExtensions.x-group-parameters}}
 {{#vendorExtensions.x-group-parameters}}
 {{#allParams}}$associate_array['{{paramName}}'] = {{{example}}}; // {{{dataType}}}{{#description}} | {{{description}}}{{/description}}
+
 {{/allParams}}
 {{/vendorExtensions.x-group-parameters}}
 

@@ -5,7 +5,7 @@
 [![PHP version](https://badge.fury.io/ph/signiflow%2Fconnect-php-sdk.svg)](https://badge.fury.io/ph/signiflow%2Fconnect-php-sdk)
 [![Apache-2 license](https://img.shields.io/badge/license-Apache2-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
-# {{packageName}} - the PHP library for the {{appName}}
+# SigniFlow/connect-php-sdk - the PHP library for the {{appName}}
 
 {{#appDescriptionWithNewLines}}
 {{{appDescriptionWithNewLines}}}
@@ -34,7 +34,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "{{gitUserId}}/{{gitRepoId}}": ">=1.2*"
+    "{{gitUserId}}/{{gitRepoId}}": ">={{artifactVersion}}*"
   }
 }
 ```
@@ -70,7 +70,14 @@ $apiInstance = new {{invokerPackage}}\Api\{{classname}}(
     new GuzzleHttp\Client(),
     $config
 );
-{{#allParams}}${{paramName}} = json_decode('{{{example}}})'; // {{{dataType}}}{{#description}} | {{{description}}}{{/description}}
+{{#allParams}}${{paramName}} = {{#isPrimitiveType}}{{{example}}}{{/isPrimitiveType}}
+{{^isPrimitiveType}}
+json_decode('{{{example}}}')
+{{/isPrimitiveType}}
+{{^isPrimitiveType}}
+ // {{{dataType}}}{{#description}} | {{{description}}}{{/description}}
+{{/isPrimitiveType}}
+
 {{/allParams}}
 
 try {

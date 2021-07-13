@@ -12,7 +12,7 @@
 This SigniFlow Connect SDK will enter a security maintenance phase in Q4 2020 and will be RETIRED (EOL) in Q2 2021. In the security
 maintenance phase, this SDK will continue to receive support and security patches but will no longer receive bug fixes or product
 updates. Once it is retired, support and security patches will no longer be available.  A new SDK, more bespoke to the language, will be available once this SDK enters its security maintenance phase.
-The SDK itself will continue to work indefinitely until such time that the underlying APIs are retired at which point portions of the SDK may stop functioning.  For a full list of API retirement dates, please see our [SigniFlow API Lifecycle documentation](https://developer.SigniFlowup.com/docs/build-basics/api-lifecycle#deprecated-apis).
+The SDK itself will continue to work indefinitely until such time that the underlying APIs are retired at which point portions of the SDK may stop functioning.  For a full list of API retirement dates, please see our [SigniFlow API Lifecycle documentation](https://developer.SigniFlow.com/docs/build-basics/api-lifecycle#deprecated-apis).
 
 | Security Maintenance | New SDK Release | Retired (EOL)  |
 | ------------- |-------------| -----|
@@ -61,7 +61,7 @@ api.listLocations().then(function(data) {
 var SigniFlowConnect = require('SigniFlow-connect');
 var defaultClient = SigniFlowConnect.ApiClient.instance;
 // Set sandbox url
-defaultClient.basePath = 'https://connect.SigniFlowupsandbox.com';
+defaultClient.basePath = 'https://connect.SigniFlowsandbox.com';
 // Configure OAuth2 access token for authorization: oauth2
 var oauth2 = defaultClient.authentications['oauth2'];
 // Set sandbox access token
@@ -181,4 +181,4 @@ limitations under the License.
 
 
 [//]: # "Link anchor definitions"
-[SigniFlow Logo]: https://docs.connect.SigniFlowup.com/images/github/github-SigniFlow-logo.svg
+[SigniFlow Logo]: https://docs.connect.SigniFlow.com/images/github/github-SigniFlow-logo.svg

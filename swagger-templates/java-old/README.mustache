@@ -4,7 +4,7 @@
 
 ---
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.SigniFlowup/connect/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.SigniFlowup/connect)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.SigniFlow/connect/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.SigniFlow/connect)
 [![Apache-2 license](https://img.shields.io/badge/license-Apache2-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 ==================
 
@@ -24,7 +24,7 @@ Add this dependency to your project's POM:
 
 ```xml
 <dependency>
-    <groupId>com.SigniFlowup</groupId>
+    <groupId>com.SigniFlow</groupId>
     <artifactId>connect</artifactId>
     <version>{{{artifactVersion}}}</version>
     <scope>compile</scope>
@@ -36,7 +36,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.SigniFlowup:connect:{{{artifactVersion}}}"
+compile "com.SigniFlow:connect:{{{artifactVersion}}}"
 ```
 
 ### Option 3: Build and Install locally
@@ -86,12 +86,12 @@ Then manually install the following JARs:
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
-import com.SigniFlowup.connect.ApiClient;
-import com.SigniFlowup.connect.ApiException;
-import com.SigniFlowup.connect.Configuration;
-import com.SigniFlowup.connect.api.LocationsApi;
-import com.SigniFlowup.connect.auth.OAuth;
-import com.SigniFlowup.connect.models.Location;
+import com.SigniFlow.connect.ApiClient;
+import com.SigniFlow.connect.ApiException;
+import com.SigniFlow.connect.Configuration;
+import com.SigniFlow.connect.api.LocationsApi;
+import com.SigniFlow.connect.auth.OAuth;
+import com.SigniFlow.connect.models.Location;
 
 import java.io.File;
 import java.util.*;
@@ -123,12 +123,12 @@ public class Example {
 ### How to configure sandbox environment
 ```java
 
-import com.SigniFlowup.connect.ApiClient;
-import com.SigniFlowup.connect.ApiException;
-import com.SigniFlowup.connect.Configuration;
-import com.SigniFlowup.connect.api.LocationsApi;
-import com.SigniFlowup.connect.auth.OAuth;
-import com.SigniFlowup.connect.models.Location;
+import com.SigniFlow.connect.ApiClient;
+import com.SigniFlow.connect.ApiException;
+import com.SigniFlow.connect.Configuration;
+import com.SigniFlow.connect.api.LocationsApi;
+import com.SigniFlow.connect.auth.OAuth;
+import com.SigniFlow.connect.models.Location;
 
 import java.io.File;
 import java.util.*;
@@ -138,7 +138,7 @@ public class Example {
     public static void main(String[] args) {
         ApiClient apiClient = Configuration.getDefaultApiClient();
         // Set sandbox url
-        apiClient.setBasePath('https://connect.SigniFlowupsandbox.com');
+        apiClient.setBasePath('https://connect.SigniFlowsandbox.com');
 
         // Configure OAuth2 access token for authorization: oauth2
         OAuth oauth2 = (OAuth) apiClient.getAuthentication("oauth2");
@@ -247,4 +247,4 @@ It's recommended to create an instance of `ApiClient` per thread in a multithrea
 
 
 [//]: # "Link anchor definitions"
-[SigniFlow Logo]: https://docs.connect.SigniFlowup.com/images/github/github-SigniFlow-logo.svg
+[SigniFlow Logo]: https://docs.connect.SigniFlow.com/images/github/github-SigniFlow-logo.svg

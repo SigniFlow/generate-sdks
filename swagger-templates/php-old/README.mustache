@@ -10,7 +10,7 @@
 ==================
 ## NOTICE: SigniFlow Connect PHP SDK deprecated
 This SigniFlow Connect SDK will enter a security maintenance phase in Q2 2020 and will be RETIRED (EOL) in Q4 2020. In the security maintenance phase, this SDK will continue to receive support and security patches but will no longer receive bug fixes or product updates. Once it is retired, support and security patches will no longer be available.  A new SDK, more bespoke to the language, will be available once this SDK enters its security maintenance phase.
-The SDK itself will continue to work indefinitely until such time that the underlying APIs are retired at which point portions of the SDK may stop functioning.  For a full list of API retirement dates, please see our [SigniFlow API Lifecycle documentation](https://developer.SigniFlowup.com/docs/build-basics/api-lifecycle#deprecated-apis).
+The SDK itself will continue to work indefinitely until such time that the underlying APIs are retired at which point portions of the SDK may stop functioning.  For a full list of API retirement dates, please see our [SigniFlow API Lifecycle documentation](https://developer.SigniFlow.com/docs/build-basics/api-lifecycle#deprecated-apis).
 
 | Security Maintenance | New SDK Release | Retired (EOL)  |
 | ------------- |-------------| -----|
@@ -24,12 +24,12 @@ for the specification and template files we used to generate this.
 
 If you are looking for a sample e-commerce application using these APIs, check out the [`connect-api-examples`](https://github.com/SigniFlow/connect-api-examples/tree/master/connect-examples/v2/php_payment) repository.
 
-To learn more about the SigniFlow APIs in general, head on over to the [SigniFlow API documentation](https://docs.connect.SigniFlowup.com/)
+To learn more about the SigniFlow APIs in general, head on over to the [SigniFlow API documentation](https://docs.connect.SigniFlow.com/)
 
 Requirements
 ------------
 * `PHP >= 5.4.0`
-* A SigniFlow account and [developer application](https://connect.SigniFlowup.com/apps/) (for authorization)
+* A SigniFlow account and [developer application](https://connect.SigniFlow.com/apps/) (for authorization)
 
 Installing
 -----
@@ -80,7 +80,7 @@ require 'vendor/autoload.php';
 $access_token = 'YOUR_ACCESS_TOKEN';
 # setup authorization
 $api_config = new \SigniFlowConnect\Configuration();
-$api_config->setHost("https://connect.SigniFlowup.com");
+$api_config->setHost("https://connect.SigniFlow.com");
 $api_config->setAccessToken($access_token);
 $api_client = new \SigniFlowConnect\ApiClient($api_config);
 # create an instance of the Location API
@@ -107,7 +107,7 @@ $access_token = 'YOUR_ACCESS_TOKEN';
 
 # setup authorization
 $api_config = new \SigniFlowConnect\Configuration();
-$api_config->setHost("https://connect.SigniFlowup.com");
+$api_config->setHost("https://connect.SigniFlow.com");
 $api_config->setAccessToken($access_token);
 $api_client = new \SigniFlowConnect\ApiClient($api_config);
 
@@ -151,7 +151,7 @@ require 'vendor/autoload.php';
 $access_token = 'YOUR_SANDBOX_ACCESS_TOKEN';
 # setup authorization
 $api_config = new \SigniFlowConnect\Configuration();
-$api_config->setHost("https://connect.SigniFlowupsandbox.com");
+$api_config->setHost("https://connect.SigniFlowsandbox.com");
 $api_config->setAccessToken($access_token);
 $api_client = new \SigniFlowConnect\ApiClient($api_config);
 # create an instance of the Location API
@@ -258,4 +258,4 @@ limitations under the License.
 ```
 
 [//]: # "Link anchor definitions"
-[SigniFlow Logo]: https://docs.connect.SigniFlowup.com/images/github/github-SigniFlow-logo.svg
+[SigniFlow Logo]: https://docs.connect.SigniFlow.com/images/github/github-SigniFlow-logo.svg

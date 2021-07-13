@@ -1,4 +1,4 @@
-package com.SigniFlowup.connect;
+package com.SigniFlow.connect;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Link;
 import javax.ws.rs.core.MultivaluedMap;
