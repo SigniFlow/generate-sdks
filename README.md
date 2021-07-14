@@ -10,6 +10,7 @@ This is the project that _generates_ API clients for connecting to the public Si
 * [Kotlin](https://github.com/SigniFlow/connect-kotlin-sdk)
 * [PHP](https://github.com/SigniFlow/connect-php-sdk)
 * [Python](https://github.com/SigniFlow/connect-python-sdk)
+* [Ruby](https://github.com/SigniFlow/connect-ruby-sdk)
 * [Swift5](https://github.com/SigniFlow/connect-swift5-sdk)
 
 
