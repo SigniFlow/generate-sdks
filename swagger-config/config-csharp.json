@@ -1,8 +1,8 @@
 {
   "packageName": "SigniFlow.Connect",
-  "packageVersion": "1.0.3",
+  "packageVersion": "1.0.7",
   "optionalProjectFile": "true",
-  "httpUserAgent": "SigniFlow-Connect-CSharp/1.0.3",
+  "httpUserAgent": "SigniFlow-Connect-CSharp/1.0.7",
   "packageGuid": "{4A65C772-5862-4E64-B742-0C6997700CD8}",
   "gitUserId": "SigniFlow",
   "gitRepoId": "connect-csharp-sdk",
@@ -10,5 +10,6 @@
   "packageCompany": "SigniFlow",
   "packageTitle": "SigniFlow.Connect",
   "targetFramework": "netstandard2.1",
+  "optionalEmitDefaultValues" : "true",
   "releaseNote": "SigniFlow.Connect - the C# library for the SigniFlow OpenAPI Spec v1"
 }

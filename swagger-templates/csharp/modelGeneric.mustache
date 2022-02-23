@@ -122,7 +122,7 @@
         /// <value>{{description}}</value>{{/description}}
         [DataMember(Name = "{{baseName}}"{{#required}}, IsRequired = true{{/required}}, EmitDefaultValue = {{#vendorExtensions.x-emit-default-value}}true{{/vendorExtensions.x-emit-default-value}}{{^vendorExtensions.x-emit-default-value}}{{#isNullable}}true{{/isNullable}}{{^isNullable}}false{{/isNullable}}{{/vendorExtensions.x-emit-default-value}})]
         {{#isDate}}
-        [JsonConverter(typeof(OpenAPIDateConverter))]
+        //[JsonConverter(typeof(OpenAPIDateConverter))]
         {{/isDate}}
         public {{{dataType}}} {{name}} { get; {{#isReadOnly}}private {{/isReadOnly}}set; }
 

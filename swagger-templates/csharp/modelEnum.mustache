@@ -17,8 +17,8 @@
         {{#isString}}
         [EnumMember(Value = "{{{value}}}")]
         {{/isString}}
-        {{name}}{{^isString}} = {{{value}}}{{/isString}}{{#isString}} = {{-index}}{{/isString}}{{^-last}},{{/-last}}
-
+        {{name}} = {{{value}}}{{^-last}},{{/-last}}
+        
         {{/enumVars}}
         {{/allowableValues}}
     }{{! NOTE: This model's enumVars is modified to look like CodegenProperty}}
